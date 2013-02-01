@@ -12,17 +12,20 @@ ArrayList companies = new ArrayList();
 // myMan sizing
 int es = 50;
 
-int a = 0;
+//global variables for background color
 color bgc = 30;
+
+//gloabl variable for array of stocks and prices
 String[] mCaps;
+
+//gloabl win variable
+boolean win = false;
 
 // Timing variables
 int startTime;
 int counter = 0;
 int once = 0;
 
-//normalizing
-int n = 0;
 
 void setup() {
   size(800, 600);
@@ -48,6 +51,7 @@ void myMan() {
   fill(255);
   textSize(int(es/5));
   text(str(int(es))+"M", mouseX, mouseY);
+  if(es > width*1.5) {win = true;}
   for (int i = companies.size()-1; i >= 0; i--) {
     Company c = (Company) companies.get(i);
     if (

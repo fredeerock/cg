@@ -1,0 +1,5 @@
+Conglomeration
+
+by Frederick Ostrenko
+
+Conglomertation is a simple game that explores the way companies are bought and sold. The goal is to grow your circle by swallowing up smaller circles and avoiding bigger ones. Each circle represents a specific company and it's size is determined by its current market capitalization.

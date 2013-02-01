@@ -28,7 +28,7 @@ void setup() {
   size(800, 600);
   startTime = millis();
   mCaps = loadStrings("all.php");
-  println(mCaps);
+  // println(mCaps);
   noCursor();
   strokeWeight(1);
 }
@@ -62,7 +62,7 @@ void myMan() {
       } 
 
       if (es < c.cSize()) {
-        es-=(c.cSize()/2);
+        es-=(c.cSize()/8);
       }
 
       // if myMan is too small make 50

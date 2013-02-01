@@ -1,0 +1,53 @@
+
+/* =Layout
+-----------------------------------------------------------------------------*/
+.wrapper {
+	margin: auto; 
+	max-width: 1000px;
+	padding: 36px 10px;
+	width: 940px;
+}
+
+/* =Header
+-----------------------------------------------------------------------------*/
+#header {
+	overflow: hidden;
+	padding-bottom: 1.5em;
+	margin-bottom: 1.5em;
+	border-bottom: 1px solid #eee;
+}
+	/*
+#header h1 {
+float: left;
+	margin: 0;
+}
+*/
+
+/* =Nav
+-----------------------------------------------------------------------------*/
+
+
+/* =Footer
+-----------------------------------------------------------------------------*/
+
+
+/* =Tablet (Portrait)
+-----------------------------------------------------------------------------*/
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+	.wrapper { width: 748px; }
+}
+
+
+/* =Mobile (Portrait)
+-----------------------------------------------------------------------------*/
+@media only screen and (max-width: 767px) {
+	.wrapper { width: 300px; }
+	#header h1 { float: none; }
+	#header h1 { margin-bottom: .5em; }
+}
+
+/* =Mobile (Landscape)
+-----------------------------------------------------------------------------*/
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+	.wrapper { width: 420px; }
+}

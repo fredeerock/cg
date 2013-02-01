@@ -55,10 +55,11 @@ void myMan() {
   for (int i = companies.size()-1; i >= 0; i--) {
     Company c = (Company) companies.get(i);
     if (
-    c.display().x > mouseX - ((c.cSize()/2)+(es/2)) && 
+      c.display().x > mouseX - ((c.cSize()/2)+(es/2)) && 
       c.display().x < mouseX + ((c.cSize()/2)+(es/2)) && 
       c.display().y > mouseY - ((c.cSize()/2)+(es/2)) && 
-      c.display().y < mouseY + ((c.cSize()/2)+(es/2))) {
+      c.display().y < mouseY + ((c.cSize()/2)+(es/2))
+	  ) {
 
       // adjust size of myMan based on company size  
       if (es > c.cSize()) {

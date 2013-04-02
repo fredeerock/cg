@@ -1,10 +1,11 @@
 /*
 to do
- - add a win screen
- - add a red flash when you shrink
- - add title screen with instructions, 
+ - fix jitter when removing companies
+ - fix blur around circles
+ - add a flash when you shrink/grow?
+ - fix first two companies showing up without circles
+ - add title screen with instructions 
  - change difficulty based on screen size
- - color of circle is upward or downward trend
  */
 
 ArrayList companies = new ArrayList();
@@ -28,6 +29,7 @@ int once = 0;
 
 
 void setup() {
+	background(bgc)
   size(800, 600);
   startTime = millis();
   mCaps = loadStrings("all.php");
@@ -51,7 +53,14 @@ void myMan() {
   fill(255);
   textSize(int(es/5));
   text(str(int(es))+"M", mouseX, mouseY);
-  if(es > width*1.5) {win = true;}
+  
+  // when do you win
+  // if(es > width*1.5) {win = true;} 
+  
+  // if myMan is too small make 50
+  if (es < 50) { es = 50; }
+  
+  // make myMan bigger or smaller when it hits other companies
   for (int i = companies.size()-1; i >= 0; i--) {
     Company c = (Company) companies.get(i);
     if (
@@ -69,11 +78,7 @@ void myMan() {
       if (es < c.cSize()) {
         es-=(c.cSize()/8);
       }
-
-      // if myMan is too small make 50
-      if (es < 50) {
-        es = 50;
-      }
+	  
       companies.remove(i);
     }
   }
@@ -94,10 +99,10 @@ void populateCompany() {
     once = 0;
   }
 
-  if (counter % 120 == 0 && once == 0) {
-    mCaps = loadStrings("all.php");
-    once = 1;
-  }
+  // if (counter % 120 == 0 && once == 0) {
+  //   mCaps = loadStrings("all.php");
+  //   once = 1;
+  // }
 }
 
 // show and remove company circles

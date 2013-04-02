@@ -1,9 +1,36 @@
-<!doctype html>  
-<meta name="viewport" content="width=device-width, maximum-scale=1.0" />
+<!doctype html>
 <meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="viewport" content="width=device-width, maximum-scale=1.0" />
 <head>  
 <script src="processing.js"></script>  
 <script src="jquery.js"></script>  
+
+<style>
+body{
+	background-color:rgb(30,30,30);
+}
+</style>
+
+<script>
+     function hideAddressBar()
+     {
+         if(!window.location.hash)
+         { 
+             if(document.height <= window.outerHeight + 10)
+             {
+                 document.body.style.height = (window.outerHeight + 50) +'px';
+                 setTimeout( function(){ window.scrollTo(0, 1); }, 50 );
+             }
+             else
+             {
+                 setTimeout( function(){ window.scrollTo(0, 1); }, 0 ); 
+             }
+         }
+     } 
+
+     window.addEventListener("load", hideAddressBar );
+     window.addEventListener("orientationchange", hideAddressBar ); 
+   </script>
 
 <script>
 window.onload = init;

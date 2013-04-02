@@ -1,6 +1,3 @@
-// TODO: Replace position ints with floats
-// TODO: create a reset state. Click to pause. Click again to reset.
-// TODO: Fix line blurring issue
 // TODO: Fix frame rate issue
 // TODO: Fix falling companies from falling through marker.
 // TODO: Adjust the shrinkage proportion
@@ -10,10 +7,13 @@
 // TODO: change difficulty based on screen size
 // TODO: color of circle is upward or downward trend
 
+int cRamp = 0;
+boolean cTrigger = false;
+
 ArrayList companies = new ArrayList();
 
 // myMan sizing
-int es = 50;
+float es = 50;
 
 //global variables for background color
 color bgc = 30;
@@ -28,6 +28,7 @@ boolean win = false;
 int startTime;
 int counter = 0;
 int once = 0;
+int pauseTimer = 0;
 
 void setup() {
   size(800, 600);
@@ -35,15 +36,38 @@ void setup() {
   mCaps = loadStrings("all.php");
   // println(mCaps);
   noCursor();
-  strokeWeight(1);
+  strokeWeight(3);
 }
 
-void draw() {
+void draw() {  
   stroke(255);
   scene();
   populateCompany();
   displayCompanies();
   myMan();
+
+  if (cTrigger) {
+    coverScreen();
+  }
+}
+
+void mouseReleased() {
+  cTrigger = true;
+}
+
+void coverScreen() {
+  noStroke();
+  if (cRamp < 50 && cTrigger == true) {
+    cRamp++;
+    float m = map(cRamp, 0, 50, 255, 0);
+    fill(m); 
+    rect(0, 0, width, height);
+    es = 50;
+  } 
+  else { 
+    cRamp = 0; 
+    cTrigger = false;
+  }
 }
 
 // Behavior and display for "myMan"
@@ -51,7 +75,7 @@ void myMan() {
   fill(225, 100, 100);
   ellipse(mouseX, mouseY, es, es);
   fill(255);
-  textSize(int(es/5));
+  textSize(es/5);
   text(str(int(es))+"M", mouseX, mouseY);
   if (es > width*1.5) {
     win = true;
@@ -122,14 +146,14 @@ void displayCompanies() {
 // a class for creating each company circle
 class Company {
   int sValue;
-  int ex;
-  int ey;
+  float ex;
+  float ey;
   int ewh;
   PVector[] pairs;
 
   Company(int sv) {
     sValue = sv;
-    ex = int(random(width));
+    ex = random(width);
     pairs = new PVector[int(mCaps.length/2)];
   }
 
@@ -169,8 +193,12 @@ class Company {
 
   PVector display() {
     ewh = mCap();
-    ey++;
-    fill(250);
+    //println(ewh);
+    //    ey = ey + ewh/50;
+    float s = 200 / ewh;
+    s > 2 ? s = 2 : s = s
+      ey = ey + s;
+    //fill(250);
     noFill();
     ellipse(ex, ey, ewh, ewh);
     fill(225, 100, 100);

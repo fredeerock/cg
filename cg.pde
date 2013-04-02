@@ -1,3 +1,4 @@
+// TODO: Fix jitter when removing companies on ios
 // TODO: Fix frame rate issue
 // TODO: Fix falling companies from falling through marker.
 // TODO: Adjust the shrinkage proportion
@@ -8,7 +9,8 @@
 // TODO: color of circle is upward or downward trend
 
 int cRamp = 0;
-boolean cTrigger = false;
+boolean cTriggerR = false;
+boolean cTriggerG = false;
 
 ArrayList companies = new ArrayList();
 
@@ -46,27 +48,46 @@ void draw() {
   displayCompanies();
   myMan();
 
-  if (cTrigger) {
-    coverScreen();
+  if (cTriggerR) {
+    coverScreenR();
+  }
+  
+    if (cTriggerG) {
+    coverScreenG();
   }
 }
 
 void mouseReleased() {
-  cTrigger = true;
+  //cTrigger = true;
 }
 
-void coverScreen() {
+void coverScreenR() {
   noStroke();
-  if (cRamp < 50 && cTrigger == true) {
+  if (cRamp < 10 && cTriggerR == true) {
     cRamp++;
-    float m = map(cRamp, 0, 50, 255, 0);
-    fill(m); 
+    float m = map(cRamp, 0, 10, 100, 0);
+    fill(255, 0, 0, m); 
     rect(0, 0, width, height);
-    es = 50;
+    //es = 50;
   } 
   else { 
     cRamp = 0; 
-    cTrigger = false;
+    cTriggerR = false;
+  }
+}
+
+void coverScreenG() {
+  noStroke();
+  if (cRamp < 10 && cTriggerG == true) {
+    cRamp++;
+    float m = map(cRamp, 0, 10, 100, 0);
+    fill(0, 255, 0, m); 
+    rect(0, 0, width, height);
+    //es = 50;
+  } 
+  else { 
+    cRamp = 0; 
+    cTriggerG = false;
   }
 }
 
@@ -88,14 +109,18 @@ void myMan() {
       c.display().y > mouseY - ((c.cSize()/2)+(es/2)) && 
       c.display().y < mouseY + ((c.cSize()/2)+(es/2))
       ) {
+        
+        
 
       // adjust size of myMan based on company size  
       if (es > c.cSize()) {
         es+=(c.cSize()/2);
+        cTriggerG = true;
       } 
 
       if (es < c.cSize()) {
         es-=(c.cSize()/8);
+        cTriggerR = true;
       }
 
       // if myMan is too small make 50
@@ -122,10 +147,10 @@ void populateCompany() {
     once = 0;
   }
 
-  if (counter % 120 == 0 && once == 0) {
-    mCaps = loadStrings("all.php");
-    once = 1;
-  }
+//  if (counter % 120 == 0 && once == 0) {
+//    mCaps = loadStrings("all.php");
+//    once = 1;
+//  }
 }
 
 // show and remove company circles
@@ -196,7 +221,7 @@ class Company {
     //println(ewh);
     //    ey = ey + ewh/50;
     float s = 200 / ewh;
-    s > 2 ? s = 2 : s = s
+    s > 2 ? s = 2 : s = s;
       ey = ey + s;
     //fill(250);
     noFill();

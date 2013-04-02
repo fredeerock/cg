@@ -1,7 +1,8 @@
 // TODO: Replace position ints with floats
-// TODO: create a reset state
+// TODO: create a reset state. Click to pause. Click again to reset.
 // TODO: Fix line blurring issue
 // TODO: Fix frame rate issue
+// TODO: Fix falling companies from falling through marker.
 // TODO: Adjust the shrinkage proportion
 // TODO: add a win screen
 // TODO: add a red flash when you shrink
@@ -28,7 +29,6 @@ int startTime;
 int counter = 0;
 int once = 0;
 
-
 void setup() {
   size(800, 600);
   startTime = millis();
@@ -53,15 +53,17 @@ void myMan() {
   fill(255);
   textSize(int(es/5));
   text(str(int(es))+"M", mouseX, mouseY);
-  if(es > width*1.5) {win = true;}
+  if (es > width*1.5) {
+    win = true;
+  }
   for (int i = companies.size()-1; i >= 0; i--) {
     Company c = (Company) companies.get(i);
     if (
-      c.display().x > mouseX - ((c.cSize()/2)+(es/2)) && 
+    c.display().x > mouseX - ((c.cSize()/2)+(es/2)) && 
       c.display().x < mouseX + ((c.cSize()/2)+(es/2)) && 
       c.display().y > mouseY - ((c.cSize()/2)+(es/2)) && 
       c.display().y < mouseY + ((c.cSize()/2)+(es/2))
-	  ) {
+      ) {
 
       // adjust size of myMan based on company size  
       if (es > c.cSize()) {

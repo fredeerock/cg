@@ -9,7 +9,7 @@
 window.onload = init;
 var processing;
 function init(){ 
-  $.get("conglomeration.pde", function(processingCode) {
+  $.get("cg.pde", function(processingCode) {
     processing = new Processing($("#PJSCanvas")[0], processingCode);
     resize();
   });

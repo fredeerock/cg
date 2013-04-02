@@ -1,11 +1,13 @@
-/*
-to do
- - add a win screen
- - add a red flash when you shrink
- - add title screen with instructions, 
- - change difficulty based on screen size
- - color of circle is upward or downward trend
- */
+// TODO: Replace position ints with floats
+// TODO: create a reset state
+// TODO: Fix line blurring issue
+// TODO: Fix frame rate issue
+// TODO: Adjust the shrinkage proportion
+// TODO: add a win screen
+// TODO: add a red flash when you shrink
+// TODO: add title screen with instructions, 
+// TODO: change difficulty based on screen size
+// TODO: color of circle is upward or downward trend
 
 ArrayList companies = new ArrayList();
 

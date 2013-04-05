@@ -42,6 +42,7 @@ void setup() {
 }
 
 void draw() {  
+
   stroke(255);
   scene();
   populateCompany();
@@ -98,7 +99,7 @@ void myMan() {
   fill(255);
   textSize(es/5);
   text(str(int(es))+"M", mouseX, mouseY);
-  if (es > width*1.5) {
+  if (es > width*2) {
     win = true;
   }
   for (int i = companies.size()-1; i >= 0; i--) {
@@ -110,8 +111,6 @@ void myMan() {
       c.display().y < mouseY + ((c.cSize()/2)+(es/2))
       ) {
         
-        
-
       // adjust size of myMan based on company size  
       if (es > c.cSize()) {
         es+=(c.cSize()/2);
@@ -129,7 +128,7 @@ void myMan() {
       }
       companies.remove(i);
     }
-  }
+  }  
 } 
 
 void scene() {
@@ -171,15 +170,16 @@ void displayCompanies() {
 // a class for creating each company circle
 class Company {
   int sValue;
-  float ex;
-  float ey;
-  int ewh;
+  float ex; // ellipse x position
+  float ey; // ellipse y position
+  float ewh; //ellipse width and height
   PVector[] pairs;
 
   Company(int sv) {
     sValue = sv;
     ex = random(width);
     pairs = new PVector[int(mCaps.length/2)];
+    ewh = (width/640)*mCap();
   }
 
   // outputs a PVector with x = to market value and y = to compnay stock symbol
@@ -203,7 +203,7 @@ class Company {
   }
 
   int mCap() {
-    int x = mCaps[int(pairing(sValue).y)];
+    int x = mCaps[pairing(sValue).y];
     return x;
   }
 
@@ -212,15 +212,17 @@ class Company {
     return x;
   }
 
-  int cSize() {
+  float cSize() {
     return ewh;
   }
 
   PVector display() {
-    ewh = mCap();
+//    ewh = (width/640)*mCap();
+    //ewh = mCap();
+
     //println(ewh);
     //    ey = ey + ewh/50;
-    float s = 200 / ewh;
+    float s = 200 / ewh; // speed of falling company
     s > 2 ? s = 2 : s = s;
       ey = ey + s;
     //fill(250);
